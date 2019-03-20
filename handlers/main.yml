@@ -1,2 +1,19 @@
 ---
 # handlers file for ntp
+ - name: restart ntp
+   service:
+     name: "{{ ntp_client }}"
+     state: restarted
+   when: ntp_enabled
+
+ - name: restart ntpd
+   service:
+     name: "{{ ntp_daemon }}"
+     state: restarted
+   when: ntpd_enabled
+
+ - name: restart syslog
+   service:
+     name: "{{ syslog_daemon }}"
+     state: restarted
+   when: ntp_enabled
