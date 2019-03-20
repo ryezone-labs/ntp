@@ -5,15 +5,18 @@
      name: "{{ ntp_client }}"
      state: restarted
    when: ntp_enabled
+   become: yes
 
  - name: restart ntpd
    service:
      name: "{{ ntp_daemon }}"
      state: restarted
    when: ntpd_enabled
+   become: yes
 
  - name: restart syslog
    service:
      name: "{{ syslog_daemon }}"
      state: restarted
    when: ntp_enabled
+   become: yes
