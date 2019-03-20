@@ -6,7 +6,42 @@ Installs and configures ntp client and daemon software.
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+- `ntpd_enabled` (bool)
+
+  When `true`, installs and configures the NTP daemon.
+
+- `ntp_enabled` (bool)
+
+  When `true`, installs and configures the NTP client.
+
+- `ntp_timezone` (string)
+
+  Sets the timezone for the server.
+
+- `ntp_manage_config` (bool)
+
+  When `true`, configures role to overwrite default configuration of NTP daemon and client with managed configuration.
+
+- `ntp_daemon_log_options` (string)
+
+  Space delimited list of options to configure in NTP daemon configuration settings.
+
+- `ntp_daemon_maxupdateskew` (decimal)
+
+  Sets the threshold used by the NTP daemon for determining whether an estimate
+  may be so unreliable that it should not be used.
+
+- `ntp_daemon_logchange` (decimal)
+
+  Sets the threshold used by the NTP daemon for amount of adjustment of the
+  system clock that will generate a syslog message.
+
+- `ntp_daemon_allow` (list of string)
+
+  List of IP Addresses to allow communication with the NTP daemon.
+
+
+
 
 Dependencies
 ------------
