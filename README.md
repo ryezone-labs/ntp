@@ -20,11 +20,13 @@ Role Variables
 
 - `ntp_manage_config` (bool)
 
-  When `true`, configures role to overwrite default configuration of NTP daemon and client with managed configuration.
+  When `true`, configures role to overwrite default configuration of NTP daemon
+  and client with managed configuration.
 
 - `ntp_daemon_log_options` (string)
 
-  Space delimited list of options to configure in NTP daemon configuration settings.
+  Space delimited list of options to configure in NTP daemon configuration
+  settings.
 
 - `ntp_daemon_maxupdateskew` (decimal)
 
@@ -44,29 +46,53 @@ Role Variables
 
   Sets the NTP area path.  See http://support.ntp.org/bin/view/Servers/NTPPoolServers
 
-  
+- `ntp_daemon_servers` (list of string)
 
+  Selects the ntp servers daemon should listen to for ntp updates.
 
-Dependencies
-------------
+- `ntp_servers` (list of string)
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+  Selects the ntp servers the ntp client should listen to for ntp updates.
+
+- `ntp_fallback_servers` (list of string)
+
+  Selects the fallback ntp servers the ntp client should listen to in the event
+  the servers in `ntp_servers` cannot be reached.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Example ntp client configuration
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```yaml
+- hosts: 127.0.0.1
+  connection: local
+  vars:
+    - ntp_enabled: True
+    - ntp_timezone: Etc/UTC
+    - ntp_servers:
+      - ntp.domain.local
+  roles:
+    - ryezone_labs.ntp
+```
+
+Example ntp daemon configuration
+
+```yaml
+- hosts: 127.0.0.1
+  connection: local
+  vars:
+    - ntp_enabled: True
+    - ntpd_enabled: True
+    - ntp_timezone: Etc/UTC
+    - ntp_area: us
+    - ntp_servers:
+      - 127.0.0.1
+  roles:
+    - ryezone_labs.ntp
+```
 
 License
 -------
 
 BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
