@@ -40,7 +40,11 @@ Role Variables
 
   List of IP Addresses to allow communication with the NTP daemon.
 
+- `ntp_area` (string)
 
+  Sets the NTP area path.  See http://support.ntp.org/bin/view/Servers/NTPPoolServers
+
+  
 
 
 Dependencies
