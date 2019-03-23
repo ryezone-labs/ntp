@@ -24,16 +24,16 @@ commandkey 1
 # I moved the driftfile to /var/lib/chrony to comply with the Debian
 # filesystem standard.
 
-driftfile {{ntp_daemon_drift_file}}
+driftfile {{ ntp_daemon_drift_file }}
 
 # Comment this line out to turn off logging.
 
 log {{ntp_daemon_log_options}}
-logdir {{ntp_daemon_log_directory}}
+logdir {{ ntp_daemon_log_directory }}
 
 # Stop bad estimates upsetting machine clock.
 
-maxupdateskew {{ntp_daemon_maxupdateskew}}
+maxupdateskew {{ ntp_daemon_maxupdateskew }}
 
 # Dump measurements when daemon exits.
 
@@ -41,7 +41,7 @@ dumponexit
 
 # Specify directory for dumping measurements.
 
-dumpdir {{ntp_daemon_dump_directory}}
+dumpdir {{ ntp_daemon_dump_directory }}
 
 # This directive designates subnets (or nodes) from which NTP clients are allowed
 # to access to 'chronyd'.
@@ -53,12 +53,12 @@ allow {{ item }}
 # This directive forces `chronyd' to send a message to syslog if it
 # makes a system clock adjustment larger than a threshold value in seconds.
 
-logchange {{ntp_daemon_logchange}}
+logchange {{ ntp_daemon_logchange }}
 
 # This directive tells 'chronyd' to parse the 'adjtime' file to find out if the
 # real-time clock keeps local time or UTC. It overrides the 'rtconutc' directive.
 
-hwclockfile {{ntp_daemon_hwclock_file}}
+hwclockfile {{ ntp_daemon_hwclock_file }}
 
 # This directive enables kernel synchronisation (every 11 minutes) of the
 # real-time clock. Note that it can’t be used along with the 'rtcfile' directive.

@@ -5,27 +5,27 @@
 
 - name: Ensure NTP daemon-related packages are installed.
   package:
-    name: "{{ntp_daemon_package}}"
+    name: "{{ ntp_daemon_package }}"
     state: present
   when: ntpd_enabled
   become: yes
 
 - name: Ensure tzdata package is installed (Linux).
   package:
-    name: "{{ntp_tzdata_package}}"
+    name: "{{ ntp_tzdata_package }}"
     state: present
   when: ansible_system == "Linux"
   become: yes
 
 - name: Set timezone.
   timezone:
-    name: "{{ntp_timezone}}"
+    name: "{{ ntp_timezone }}"
   notify: restart syslog
   become: yes
 
 - name: Ensure NTP Daemon is running and enabled as configured.
   service:
-    name: "{{ntp_daemon}}"
+    name: "{{ ntp_daemon }}"
     state: started
     enabled: yes
   when: ntpd_enabled
@@ -33,16 +33,16 @@
 
 - name: Generate NTP Daemon Configuration file.
   template:
-    src:  "{{ansible_os_family}}.daemon.ntp.j2"
-    dest: "{{ntp_daemon_conf_file}}"
+    src:  "{{ ansible_os_family }}.daemon.ntp.j2"
+    dest: "{{ ntp_daemon_conf_file }}"
   notify: restart ntpd
   when: ntp_manage_config and ntpd_enabled
   become: yes
 
 - name: Generate NTP Client Configuration file.
   template:
-    src:  "{{ansible_os_family}}.client.ntp.j2"
-    dest: "{{ntp_client_conf_file}}"
+    src:  "{{ ansible_os_family }}.client.ntp.j2"
+    dest: "{{ ntp_client_conf_file }}"
   notify: restart ntp
   when: ntp_manage_config and ntp_enabled
   become: yes
